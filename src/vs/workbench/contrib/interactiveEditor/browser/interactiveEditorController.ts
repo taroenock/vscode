@@ -459,6 +459,9 @@ export class InteractiveEditorController implements IEditorContribution {
 			this._historyOffset = -1;
 			const inputPromise = this._zone.getInput(wholeRange.getEndPosition(), placeholder, value, this._ctsRequest.token);
 
+			if (opts.autoRun) {
+				this._zone.widget.acceptInput();
+			}
 
 			this._ctxLastFeedbackKind.reset();
 
