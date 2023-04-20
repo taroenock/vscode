@@ -38,9 +38,11 @@ export class ExtensionEnablementWorkspaceTrustTransitionParticipant extends Disp
 							if (environmentService.remoteAuthority) {
 								hostService.reload();
 							} else {
-								extensionService.stopExtensionHosts();
-								await extensionEnablementService.updateExtensionsEnablementsWhenWorkspaceTrustChanges();
-								extensionService.startExtensionHosts();
+								const stopped = await extensionService.stopExtensionHosts(false);
+								if (stopped) {
+									await extensionEnablementService.updateExtensionsEnablementsWhenWorkspaceTrustChanges();
+									extensionService.startExtensionHosts();
+								}
 							}
 						}
 					}

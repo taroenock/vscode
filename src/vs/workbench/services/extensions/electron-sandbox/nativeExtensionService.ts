@@ -506,7 +506,7 @@ export class NativeExtensionService extends AbstractExtensionService implements 
 
 	protected _onExtensionHostExit(code: number): void {
 		// Dispose everything associated with the extension host
-		this.stopExtensionHosts();
+		this.stopExtensionHosts(true);
 
 		// Dispose the management connection to avoid reconnecting after the extension host exits
 		const connection = this._remoteAgentService.getConnection();
